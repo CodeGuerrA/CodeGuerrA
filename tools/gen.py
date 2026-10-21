@@ -64,7 +64,7 @@ def banner():
     body += text_rects("10", 846, 14, 8, GOLD_DARK)
     body += text_rects("10", 840, 8, 8, GOLD)
 
-    # a bola do Kaiser Impact: sai da coroa, atravessa o galho e para no fim
+    # a bola do chute: atravessa o galho em alta velocidade e para no fim
     trail = "".join(
         f'<rect x="{-length}" y="{y}" width="{length}" height="3" fill="{color}"/>'
         for length, y, color in ((120, 9, "#5B8FE8"), (80, 15, ICE), (160, 21, "#2E63C7"))
