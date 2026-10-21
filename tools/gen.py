@@ -1,7 +1,9 @@
 """Gera assets/banner.svg e assets/ficha.svg. Uso: python3 tools/gen.py (na pasta perfil-github)."""
+import json
+import re
 from pathlib import Path
 
-from pixel import sprite_rects, text_rects, text_width, wrap
+from pixel import PALETTE as PALETTE_UI, sprite_rects, text_rects, text_width, wrap
 from sprites import ball, crown_tilted, rose, vine_tile
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -25,13 +27,13 @@ LANGUAGES = [
 ]
 
 
-def svg(width, height, title, desc, body, style=""):
+def svg(width, height, title, desc, body, style="", background=True):
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}" '
         f'role="img" aria-labelledby="t d" shape-rendering="crispEdges">\n'
         f"<title id=\"t\">{title}</title>\n<desc id=\"d\">{desc}</desc>\n"
         + (f"<style>{style}</style>\n" if style else "")
-        + f'<rect width="{width}" height="{height}" fill="{BG}"/>\n'
+        + (f'<rect width="{width}" height="{height}" fill="{BG}"/>\n' if background else "")
         + "\n".join(body)
         + "\n</svg>\n"
     )
@@ -47,12 +49,12 @@ def banner():
 
     # galho de espinhos: sai do caule da rosa e corre embaixo do texto
     tile = vine_tile()
-    for x in range(150, 960, 48):
-        body += sprite_rects(tile, x, 282, 3)
+    for x in range(150, 960, len(tile[0]) * 3):
+        body += sprite_rects(tile, x, 280, 3)
 
     body += sprite_rects(rose(stem_rows=14), 8, 92, 7)
     # a coroa inclinada, apoiada no alto da rosa
-    body += sprite_rects(crown_tilted(), 118, 24, 4)
+    body += sprite_rects(crown_tilted(), 100, 22, 4)
 
     body += text_rects("CARLOS GARCIA", 296, 34, 6, BLOND)
     body += text_rects("DEV FULL STACK", 296, 112, 4, GOLD)
@@ -67,8 +69,8 @@ def banner():
         f'<rect x="{-length}" y="{y}" width="{length}" height="3" fill="{color}"/>'
         for length, y, color in ((120, 9, "#5B8FE8"), (80, 15, ICE), (160, 21, "#2E63C7"))
     )
-    ball_rects = "".join(sprite_rects(ball(), 0, 0, 3))
-    body.append(f'<g transform="translate(300 252)"><g class="shot"><g class="trail">{trail}</g>{ball_rects}</g></g>')
+    ball_rects = "".join(sprite_rects(ball(), 0, 0, 2))
+    body.append(f'<g transform="translate(300 264)"><g class="shot"><g class="trail">{trail}</g>{ball_rects}</g></g>')
 
     style = (
         ".shot{animation:shot 7s infinite;transform:translateX(590px)}"
@@ -88,7 +90,7 @@ def banner():
 
 
 def ficha():
-    w, h = 800, 380
+    w, h = 800, 316
     body = []
     frame = "#2A2D3A"
     body.append(f'<rect x="8" y="8" width="{w - 16}" height="4" fill="{frame}"/>')
@@ -102,10 +104,10 @@ def ficha():
 
     # caixa do total, como o TOTAL da ficha
     box = 168
-    body.append(f'<rect x="24" y="96" width="{box}" height="196" fill="#18151A"/>')
+    body.append(f'<rect x="24" y="96" width="{box}" height="156" fill="#18151A"/>')
     body.append(f'<rect x="24" y="96" width="{box}" height="4" fill="{GOLD}"/>')
-    body += text_rects("68", 24 + (box - text_width("68", 10)) // 2, 112, 10, BLOND)
-    body += text_rects("REPOSITÓRIOS", 24 + (box - text_width("REPOSITÓRIOS", 2)) // 2, 236, 2, TEXT)
+    body += text_rects("68", 24 + (box - text_width("68", 8)) // 2, 106, 8, BLOND)
+    body += text_rects("REPOSITÓRIOS", 24 + (box - text_width("REPOSITÓRIOS", 2)) // 2, 206, 2, TEXT)
 
     # barra empilhada, como a barra de linguagens do próprio GitHub
     bar_x, bar_w = 216, 560
@@ -122,12 +124,12 @@ def ficha():
     for i, (name, pct, _, color) in enumerate(LANGUAGES):
         col, row = divmod(i, 4)
         lx, col_w = columns[col]
-        ly = 146 + row * 40
-        body.append(f'<rect x="{lx}" y="{ly + 10}" width="16" height="16" fill="{color}"/>')
-        body += text_rects(name, lx + 28, ly, 3, TEXT)
-        body += text_rects(pct, lx + col_w - text_width(pct, 3), ly, 3, GOLD)
+        ly = 142 + row * 28
+        body.append(f'<rect x="{lx}" y="{ly + 6}" width="12" height="12" fill="{color}"/>')
+        body += text_rects(name, lx + 22, ly, 2, TEXT)
+        body += text_rects(pct, lx + col_w - text_width(pct, 2), ly, 2, GOLD)
 
-    body += text_rects("BYTES DE CÓDIGO, MEDIDO EM 21/10/2026", 24, 318, 2, "#9AA1B2")
+    body += text_rects("BYTES DE CÓDIGO, MEDIDO EM 21/10/2026", 24, 266, 2, "#9AA1B2")
     title = "Linguagens no GitHub de Carlos Garcia"
     desc = (
         "Ficha com a divisão das linguagens por bytes de código em 68 repositórios, "
@@ -137,26 +139,43 @@ def ficha():
 
 
 CARD_W = 800
+
+# Experiência: do mais recente para o mais antigo (só o ano; os meses não foram informados)
+EXPERIENCE = [
+    ("2026 - atual", "Gerente de Tecnologia", "EMATER Goiás",
+     "Agência Goiana de Assistência Técnica, Extensão Rural e Pesquisa Agropecuária",
+     "Desenvolvo a intranet e os sistemas internos que melhoram o fluxo de trabalho das equipes."),
+    ("2026 - atual", "Gerente de Tecnologia", "ASBRAER",
+     "Associação Brasileira das Entidades Estaduais de Assistência Técnica e Extensão Rural",
+     "Desenvolvi o portal do Censo da ASBRAER para os usuários."),
+    ("2025 - 2026", "Desenvolvedor Ruby on Rails", "ALEGO", "Assembleia Legislativa do Estado de Goiás", None),
+]
 FRAME = "#2A2D3A"
 SURFACE = "#18151A"
 
+# Stack (levantada do sistema da EMATER e dos repositórios): (nome na placa, ícone do Simple Icons)
 STACK = [
-    ("Back", ["Java 21", "Spring Boot", "Spring Security", "OAuth2", "Keycloak"]),
-    ("Dados", ["PostgreSQL", "Flyway", "Redis"]),
-    ("Front", ["React", "TypeScript", "Next.js", "Vite", "Tailwind CSS", "Angular"]),
-    ("Mobile", ["Flutter"]),
-    ("Entrega", ["Docker"]),
+    ("Back", [("Java 21", "openjdk"), ("Spring Boot", "springboot"), ("Spring Security", "springsecurity"),
+              ("Keycloak", "keycloak"), ("Ruby on Rails", "rubyonrails"), ("RabbitMQ", "rabbitmq")]),
+    ("Front", [("React", "react"), ("TypeScript", "typescript"), ("Vite", "vite"), ("Tailwind CSS", "tailwindcss"),
+               ("TanStack Query", "reactquery"), ("React Router", "reactrouter"), ("Next.js", "nextdotjs")]),
+    ("Dados", [("PostgreSQL", "postgresql"), ("Flyway", "flyway"), ("Redis", "redis")]),
+    ("Testes", [("JUnit 5", "junit5"), ("Vitest", "vitest"), ("Playwright", None)]),
+    ("Mobile", [("Flutter", "flutter")]),
+    ("Entrega", [("Docker", "docker"), ("Nginx", "nginx")]),
 ]
 
-PROJECTS = [
-    ("bot-chamados-glpi-alego", "Chatbot de service desk pelo WhatsApp, integrado ao GLPI.",
-     "Java 21, Spring Boot, arquitetura hexagonal e Redis"),
-    ("simulador-precificacao-saas", "Ajuda a decidir o preço e o número de clientes de um serviço por assinatura.",
-     "Next.js, React e TypeScript"),
-    ("PI-Personal-Finance", "App de finanças pessoais, com API e app de celular.", "Spring Boot e Flutter"),
-    ("keycloak-spring", "Login com Keycloak numa API Spring Boot.", "Java 21, Spring Security e Keycloak"),
-]
+ICONS = Path(__file__).resolve().parent / "icons"
+ICON_COLORS = json.loads((ICONS / "cores.json").read_text(encoding="utf-8"))
 
+
+def icon(slug, x, y, size):
+    """Logotipo oficial (Simple Icons, CC0) na cor da marca, ou claro quando a cor some no fundo."""
+    if slug is None:  # sem logotipo na biblioteca: um sinal neutro em pixel, não um logotipo inventado
+        return sprite_rects(["l....", "lll..", "lllll", "lll..", "l...."], x + 1, y + 2, size // 6)
+    d = re.search(r' d="([^"]+)"', (ICONS / f"{slug}.svg").read_text(encoding="utf-8")).group(1)
+    color = ICON_COLORS[slug]["use"]
+    return [f'<path d="{d}" fill="{color}" transform="translate({x} {y}) scale({size / 24})" shape-rendering="geometricPrecision"/>']
 
 def frame(w, h):
     return [
@@ -178,62 +197,110 @@ def title_bar(text, x=24, y=28):
 def section_title(text):
     w, h = CARD_W, 64
     body = title_bar(text, 0, 12)
-    return svg(w, h, text.capitalize(), f"Título da seção: {text.capitalize()}.", body)
+    # sem fundo: a barra fica direto sobre o fundo do GitHub, sem faixa de outro tom
+    return svg(w, h, text.capitalize(), f"Título da seção: {text.capitalize()}.", body, background=False)
 
 
-def chip(label, x, y):
-    tw = text_width(label, 3)
-    w, h = tw + 28, 44
+def chip(label, slug, x, y):
+    tw = text_width(label, 2)
+    w, h = tw + 46, 32
     out = [
         f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{SURFACE}"/>',
-        f'<rect x="{x}" y="{y}" width="{w}" height="4" fill="#2E63C7"/>',
-        f'<rect x="{x}" y="{y + h - 4}" width="{w}" height="4" fill="{FRAME}"/>',
+        f'<rect x="{x}" y="{y}" width="{w}" height="3" fill="#2E63C7"/>',
+        f'<rect x="{x}" y="{y + h - 3}" width="{w}" height="3" fill="{FRAME}"/>',
     ]
-    out += text_rects(label, x + 14, y + 4, 3, TEXT)
+    out += icon(slug, x + 9, y + 7, 18)
+    out += text_rects(label, x + 35, y + 4, 2, TEXT)
     return out, w, h
 
 
 def stack_card():
     body = []
     body += title_bar("STACK")
-    y = 92
-    label_w = 150
+    y = 88
+    label_w = 110
     for group, items in STACK:
-        body += text_rects(group, 28, y + 4, 3, GOLD)
+        body += text_rects(group, 28, y + 4, 2, GOLD)
         x = 28 + label_w
         row_h = 0
-        for item in items:
-            parts, cw, ch = chip(item, 0, 0)
+        for label, slug in items:
+            _, cw, ch = chip(label, slug, 0, 0)
             if x + cw > CARD_W - 28:
                 x = 28 + label_w
-                y += ch + 10
-            body += chip(item, x, y)[0]
-            x += cw + 10
+                y += ch + 8
+            body += chip(label, slug, x, y)[0]
+            x += cw + 8
             row_h = ch
-        y += row_h + 22
+        y += row_h + 14
     h = y + 12
-    rows = "; ".join(f"{g}: {', '.join(i)}" for g, i in STACK)
+    rows = "; ".join(f"{g}: {', '.join(label for label, _ in i)}" for g, i in STACK)
     return svg(CARD_W, h, "Stack", f"Stack de Carlos Garcia. {rows}.", frame(CARD_W, h) + body)
 
 
-def project_card(name, description, made_with):
+def education_card():
+    """Formação: só o que está confirmado (curso e instituição), com um capelo em pixel."""
+    body = title_bar("FORMAÇÃO")
+    cap = [  # capelo: tampo em losango, copa embaixo e borla dourada pendurada na ponta direita
+        ".......n.......",
+        ".....nnhnn.....",
+        "...nnhhhhhnn...",
+        ".nnhhlllllhhnn.",
+        "nhhlllllllllhhn",
+        ".nnbbbbbbbbbnGn",
+        "...nnbbbbbnn.G.",
+        "....nmmmmmn..G.",
+        "....nmmmmmn.GGG",
+        "....nnnnnnn.GGG",
+    ]
+    body += sprite_rects(cap, 28, 92, 5, {**PALETTE_UI, "n": "#0A1230"})
+    body += text_rects("Engenharia de Software", 112, 92, 3, BLOND)
+    body += text_rects("Faculdade SENAI FATESG", 112, 128, 2, ICE)
+    body += text_rects("Curso superior, em andamento", 112, 152, 2, "#9AA1B2")
+    h = 196
+    desc = "Formação: Engenharia de Software, curso superior em andamento na Faculdade SENAI FATESG."
+    return svg(CARD_W, h, "Formação", desc, frame(CARD_W, h) + body)
+
+
+def footer():
+    """Fecho do README: o galho de espinhos atravessa e termina na rosa coroada pequena."""
+    w, h = CARD_W, 96
     body = []
-    # nome do projeto em destaque, com a pedra azul ao lado
-    body += sprite_rects(["obbo", "bhlb", "blbm", "obmo"], 28, 34, 4)
-    body += text_rects(name, 56, 24, 4, BLOND)
-    y = 82
-    for line in wrap(description, CARD_W - 56, 3):
-        body += text_rects(line, 28, y, 3, TEXT)
-        y += 34
-    y += 6
-    body += text_rects("Feito com", 28, y, 3, GOLD)
-    x0 = 28 + text_width("Feito com", 3) + 18
-    for i, line in enumerate(wrap(made_with, CARD_W - 28 - x0, 3)):
-        body += text_rects(line, x0, y + i * 34, 3, ICE)
-    y += 34 * len(wrap(made_with, CARD_W - 28 - x0, 3))
-    h = y + 22
-    desc = f"Projeto {name}: {description} Feito com {made_with}."
-    return svg(CARD_W, h, name, desc, frame(CARD_W, h) + body)
+    tile = vine_tile()
+    for x in range(0, w - 120, len(tile[0]) * 3):
+        body += sprite_rects(tile, x, 46, 3)
+    body += sprite_rects(rose(stem_rows=4, leaves=False), w - 132, 6, 3)
+    body += sprite_rects(crown_tilted(), w - 92, -6, 2)
+    return svg(w, h, "Fecho", "Galho de espinhos que termina numa rosa azul com coroa.", body, background=False)
+
+
+def experience_card():
+    """Linha do tempo: período em dourado à esquerda; cargo, instituição e o que foi feito à direita."""
+    body = title_bar("EXPERIÊNCIA")
+    x_period, x_rail, x_text = 28, 190, 214
+    width = CARD_W - 28 - x_text
+    y = 92
+    rail_top = y + 8
+    for period, role, org, org_full, did in EXPERIENCE:
+        body += text_rects(period, x_period, y, 2, GOLD)
+        body += sprite_rects(["obbo", "bhlb", "blbm", "obmo"], x_rail - 6, y + 4, 3)
+        body += text_rects(role, x_text, y - 2, 3, BLOND)
+        body += text_rects(org, x_text, y + 34, 2, ICE)
+        line_y = y + 58
+        for line in wrap(org_full, width, 2):
+            body += text_rects(line, x_text, line_y, 2, "#9AA1B2")
+            line_y += 22
+        if did:
+            line_y += 6
+            for line in wrap(did, width, 2):
+                body += text_rects(line, x_text, line_y, 2, TEXT)
+                line_y += 22
+        y = line_y + 22
+    body.insert(0, f'<rect x="{x_rail - 1}" y="{rail_top}" width="2" height="{y - rail_top - 40}" fill="#1F3E8C"/>')
+    h = y + 8
+    parts = []
+    for p_, r, o, full, did in EXPERIENCE:
+        parts.append(f"{p_}: {r}, {o} ({full})." + (f" {did}" if did else ""))
+    return svg(CARD_W, h, "Experiência", "Experiência. " + " ".join(parts), frame(CARD_W, h) + body)
 
 
 if __name__ == "__main__":
@@ -249,8 +316,8 @@ def avatar():
     """Foto de perfil: a rosa coroada no centro, pensada para o recorte redondo do GitHub."""
     w = h = 460
     body = [f'<circle cx="230" cy="230" r="230" fill="#14244F" opacity="0.35"/>']
-    body += sprite_rects(rose(stem_rows=5, leaves=False), -8, 150, 12)
-    body += sprite_rects(crown_tilted(), 184, 30, 7)
+    body += sprite_rects(rose(stem_rows=3, leaves=False), -8, 176, 12)
+    body += sprite_rects(crown_tilted(), 150, 30, 7)
     return svg(w, h, "Rosa azul coroada", "Pixel art de uma rosa azul com uma coroa dourada inclinada sobre ela.", body)
 
 
@@ -258,8 +325,9 @@ if __name__ == "__main__":
     out = ROOT / "assets"
     (out / "avatar.svg").write_text(avatar(), encoding="utf-8")
     (out / "stack.svg").write_text(stack_card(), encoding="utf-8")
-    for slug, title in (("sobre", "SOBRE"), ("em-campo", "EM CAMPO")):
+    (out / "experiencia.svg").write_text(experience_card(), encoding="utf-8")
+    (out / "formacao.svg").write_text(education_card(), encoding="utf-8")
+    (out / "fecho.svg").write_text(footer(), encoding="utf-8")
+    for slug, title in (("sobre", "SOBRE"),):
         (out / f"titulo-{slug}.svg").write_text(section_title(title), encoding="utf-8")
-    for name, description, made_with in PROJECTS:
-        (out / f"projeto-{name.lower()}.svg").write_text(project_card(name, description, made_with), encoding="utf-8")
     print(sorted(p.name for p in out.iterdir()))

@@ -1,0 +1,128 @@
+{
+ "openjdk": {
+  "title": "OpenJDK",
+  "hex": "#000000",
+  "contrast": 1.16,
+  "use": "#E9ECF3"
+ },
+ "springboot": {
+  "title": "Spring Boot",
+  "hex": "#6DB33F",
+  "contrast": 7.04,
+  "use": "#6DB33F"
+ },
+ "springsecurity": {
+  "title": "Spring Security",
+  "hex": "#6DB33F",
+  "contrast": 7.04,
+  "use": "#6DB33F"
+ },
+ "keycloak": {
+  "title": "Keycloak",
+  "hex": "#4D4D4D",
+  "contrast": 2.14,
+  "use": "#E9ECF3"
+ },
+ "rubyonrails": {
+  "title": "Ruby on Rails",
+  "hex": "#D30001",
+  "contrast": 3.25,
+  "use": "#D30001"
+ },
+ "rabbitmq": {
+  "title": "RabbitMQ",
+  "hex": "#FF6600",
+  "contrast": 6.16,
+  "use": "#FF6600"
+ },
+ "react": {
+  "title": "React",
+  "hex": "#61DAFB",
+  "contrast": 11.14,
+  "use": "#61DAFB"
+ },
+ "typescript": {
+  "title": "TypeScript",
+  "hex": "#3178C6",
+  "contrast": 3.99,
+  "use": "#3178C6"
+ },
+ "vite": {
+  "title": "Vite",
+  "hex": "#9135FF",
+  "contrast": 3.58,
+  "use": "#9135FF"
+ },
+ "tailwindcss": {
+  "title": "Tailwind CSS",
+  "hex": "#06B6D4",
+  "contrast": 7.45,
+  "use": "#06B6D4"
+ },
+ "reactquery": {
+  "title": "React Query",
+  "hex": "#FF4154",
+  "contrast": 5.29,
+  "use": "#FF4154"
+ },
+ "reactrouter": {
+  "title": "React Router",
+  "hex": "#CA4245",
+  "contrast": 3.77,
+  "use": "#CA4245"
+ },
+ "nextdotjs": {
+  "title": "Next.js",
+  "hex": "#000000",
+  "contrast": 1.16,
+  "use": "#E9ECF3"
+ },
+ "postgresql": {
+  "title": "PostgreSQL",
+  "hex": "#4169E1",
+  "contrast": 3.73,
+  "use": "#4169E1"
+ },
+ "flyway": {
+  "title": "Flyway",
+  "hex": "#CC0200",
+  "contrast": 3.08,
+  "use": "#CC0200"
+ },
+ "redis": {
+  "title": "Redis",
+  "hex": "#FF4438",
+  "contrast": 5.28,
+  "use": "#FF4438"
+ },
+ "junit5": {
+  "title": "JUnit5",
+  "hex": "#25A162",
+  "contrast": 5.47,
+  "use": "#25A162"
+ },
+ "vitest": {
+  "title": "Vitest",
+  "hex": "#00FF74",
+  "contrast": 13.4,
+  "use": "#00FF74"
+ },
+ "flutter": {
+  "title": "Flutter",
+  "hex": "#02569B",
+  "contrast": 2.42,
+  "use": "#E9ECF3"
+ },
+ "docker": {
+  "title": "Docker",
+  "hex": "#2496ED",
+  "contrast": 5.74,
+  "use": "#2496ED"
+ },
+ "nginx": {
+  "title": "NGINX",
+  "hex": "#009639",
+  "contrast": 4.67,
+  "use": "#009639"
+ }
+}

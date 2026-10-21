@@ -62,8 +62,8 @@ def chart(calendar):
     x0, y0 = 28, 120
     body = title_bar("CONTRIBUIÇÕES")
     total = thousands(calendar["totalContributions"])
-    body += text_rects(total, CARD_W - 28 - text_width(total, 4) - text_width(" no último ano", 3), 28, 4, BLOND)
-    body += text_rects(" no último ano", CARD_W - 28 - text_width(" no último ano", 3), 36, 3, ICE)
+    body += text_rects(total, CARD_W - 28 - text_width(total, 3) - text_width(" no último ano", 2), 30, 3, BLOND)
+    body += text_rects(" no último ano", CARD_W - 28 - text_width(" no último ano", 2), 36, 2, ICE)
     last_month = None
     for i, week in enumerate(weeks):
         x = x0 + i * (cell + gap)
