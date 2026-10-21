@@ -16,6 +16,7 @@ PALETTE = {
     "s": "#2A2D3A",  # gomos da bola
     "n": "#3B2709",  # contorno do ouro
     "L": "#FFF0B8",  # reflexo do ouro
+    "q": "#B7BDCB",  # sombra da bola
 }
 
 # Fonte 5x7 com 2 linhas de acento em cima e 1 de descendente embaixo (altura total 10).
