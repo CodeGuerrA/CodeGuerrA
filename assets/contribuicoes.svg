@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" width="800" height="280" role="img" aria-labelledby="t d" shape-rendering="crispEdges">
 <title id="t">Contribuições no último ano</title>
-<desc id="d">Quadro de contribuições do último ano: 3.961 contribuições, públicas e privadas. Dia mais forte: 2026-10-06, com 179.</desc>
+<desc id="d">Quadro de contribuições do último ano: 3.964 contribuições, públicas e privadas. Dia mais forte: 2026-10-06, com 179.</desc>
 <rect width="800" height="280" fill="#0E0D12"/>
 <rect x="8" y="8" width="784" height="4" fill="#2A2D3A"/>
 <rect x="8" y="268" width="784" height="4" fill="#2A2D3A"/>
@@ -166,13 +166,15 @@
 <rect x="509" y="56" width="4" height="4" fill="#F4E5BA"/>
 <rect x="525" y="56" width="4" height="4" fill="#F4E5BA"/>
 <rect x="513" y="60" width="12" height="4" fill="#F4E5BA"/>
-<rect x="541" y="36" width="4" height="4" fill="#F4E5BA"/>
-<rect x="537" y="40" width="8" height="4" fill="#F4E5BA"/>
-<rect x="541" y="44" width="4" height="4" fill="#F4E5BA"/>
-<rect x="541" y="48" width="4" height="4" fill="#F4E5BA"/>
-<rect x="541" y="52" width="4" height="4" fill="#F4E5BA"/>
-<rect x="541" y="56" width="4" height="4" fill="#F4E5BA"/>
-<rect x="537" y="60" width="12" height="4" fill="#F4E5BA"/>
+<rect x="545" y="36" width="4" height="4" fill="#F4E5BA"/>
+<rect x="541" y="40" width="8" height="4" fill="#F4E5BA"/>
+<rect x="537" y="44" width="4" height="4" fill="#F4E5BA"/>
+<rect x="545" y="44" width="4" height="4" fill="#F4E5BA"/>
+<rect x="533" y="48" width="4" height="4" fill="#F4E5BA"/>
+<rect x="545" y="48" width="4" height="4" fill="#F4E5BA"/>
+<rect x="533" y="52" width="20" height="4" fill="#F4E5BA"/>
+<rect x="545" y="56" width="4" height="4" fill="#F4E5BA"/>
+<rect x="545" y="60" width="4" height="4" fill="#F4E5BA"/>
 <rect x="565" y="48" width="12" height="3" fill="#A9C8FF"/>
 <rect x="565" y="51" width="3" height="3" fill="#A9C8FF"/>
 <rect x="577" y="51" width="3" height="3" fill="#A9C8FF"/>
@@ -270,7 +272,7 @@
 <rect x="28" y="120" width="12" height="12" fill="#14244F"/>
 <rect x="28" y="134" width="12" height="12" fill="#14244F"/>
 <rect x="28" y="148" width="12" height="12" fill="#14244F"/>
-<rect x="28" y="162" width="12" height="12" fill="#1A1C26"/>
+<rect x="28" y="162" width="12" height="12" fill="#14244F"/>
 <rect x="28" y="176" width="12" height="12" fill="#14244F"/>
 <rect x="28" y="190" width="12" height="12" fill="#14244F"/>
 <rect x="28" y="204" width="12" height="12" fill="#14244F"/>
@@ -322,7 +324,7 @@
 <rect x="70" y="190" width="12" height="12" fill="#1A1C26"/>
 <rect x="70" y="204" width="12" height="12" fill="#1A1C26"/>
 <rect x="84" y="120" width="12" height="12" fill="#14244F"/>
-<rect x="84" y="134" width="12" height="12" fill="#1A1C26"/>
+<rect x="84" y="134" width="12" height="12" fill="#14244F"/>
 <rect x="84" y="148" width="12" height="12" fill="#14244F"/>
 <rect x="84" y="162" width="12" height="12" fill="#14244F"/>
 <rect x="84" y="176" width="12" height="12" fill="#14244F"/>
@@ -474,8 +476,8 @@
 <rect x="252" y="134" width="12" height="12" fill="#1A1C26"/>
 <rect x="252" y="148" width="12" height="12" fill="#1A1C26"/>
 <rect x="252" y="162" width="12" height="12" fill="#1A1C26"/>
-<rect x="252" y="176" width="12" height="12" fill="#14244F"/>
-<rect x="252" y="190" width="12" height="12" fill="#1A1C26"/>
+<rect x="252" y="176" width="12" height="12" fill="#1A1C26"/>
+<rect x="252" y="190" width="12" height="12" fill="#14244F"/>
 <rect x="252" y="204" width="12" height="12" fill="#1A1C26"/>
 <rect x="266" y="120" width="12" height="12" fill="#1A1C26"/>
 <rect x="266" y="134" width="12" height="12" fill="#1A1C26"/>
@@ -630,8 +632,8 @@
 <rect x="444" y="100" width="6" height="2" fill="#9AA1B2"/>
 <rect x="420" y="120" width="12" height="12" fill="#1A1C26"/>
 <rect x="420" y="134" width="12" height="12" fill="#1A1C26"/>
-<rect x="420" y="148" width="12" height="12" fill="#14244F"/>
-<rect x="420" y="162" width="12" height="12" fill="#1A1C26"/>
+<rect x="420" y="148" width="12" height="12" fill="#1A1C26"/>
+<rect x="420" y="162" width="12" height="12" fill="#14244F"/>
 <rect x="420" y="176" width="12" height="12" fill="#1A1C26"/>
 <rect x="420" y="190" width="12" height="12" fill="#1A1C26"/>
 <rect x="420" y="204" width="12" height="12" fill="#1A1C26"/>
