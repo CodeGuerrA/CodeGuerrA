@@ -262,15 +262,21 @@ def education_card():
 
 
 def footer():
-    """Fecho do README: o galho de espinhos atravessa e termina na rosa coroada pequena."""
-    w, h = CARD_W, 96
+    """Fecho do README: o galho de espinhos atravessa e termina na rosa coroada, com a coroa de lado
+    no ombro da rosa, na mesma proporção do banner."""
+    w, h = CARD_W, 180
     body = []
+    rose_cell, rose_x = 4, w - 150
+    rose_rows = rose(stem_rows=8, leaves=False)
+    rose_y = h - len(rose_rows) * rose_cell - 2
+    stem_x = rose_x + 16 * rose_cell  # onde o caule fica, para o galho terminar nele
     tile = vine_tile()
-    for x in range(0, w - 120, len(tile[0]) * 3):
-        body += sprite_rects(tile, x, 46, 3)
-    body += sprite_rects(rose(stem_rows=4, leaves=False), w - 132, 6, 3)
-    body += sprite_rects(crown_tilted(), w - 92, -6, 2)
-    return svg(w, h, "Fecho", "Galho de espinhos que termina numa rosa azul com coroa.", body, background=False)
+    for x in range(0, stem_x, len(tile[0]) * 3):
+        body += sprite_rects(tile, x, h - 42, 3)  # o meio do galho cruza o caule, não a flor
+    body += sprite_rects(rose_rows, rose_x, rose_y, rose_cell)
+    # banner: coroa 92 px à direita e 70 px acima da rosa de célula 7 -> mesma proporção aqui
+    body += sprite_rects(crown_tilted(), rose_x + round(92 * rose_cell / 7), rose_y - round(70 * rose_cell / 7), 2)
+    return svg(w, h, "Fecho", "Galho de espinhos que termina numa rosa azul com a coroa de lado.", body, background=False)
 
 
 def experience_card():
