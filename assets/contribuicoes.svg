@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" width="800" height="280" role="img" aria-labelledby="t d" shape-rendering="crispEdges">
 <title id="t">Contribuições no último ano</title>
-<desc id="d">Quadro de contribuições do último ano: 4.152 contribuições, públicas e privadas. Dia mais forte: 2026-10-06, com 179.</desc>
+<desc id="d">Quadro de contribuições do último ano: 4.175 contribuições, públicas e privadas. Dia mais forte: 2026-10-06, com 179.</desc>
 <rect width="800" height="280" fill="#0E0D12"/>
 <rect x="8" y="8" width="784" height="4" fill="#2A2D3A"/>
 <rect x="8" y="268" width="784" height="4" fill="#2A2D3A"/>
@@ -158,21 +158,20 @@
 <rect x="581" y="51" width="3" height="3" fill="#F4E5BA"/>
 <rect x="578" y="54" width="9" height="3" fill="#F4E5BA"/>
 <rect x="593" y="36" width="15" height="3" fill="#F4E5BA"/>
-<rect x="593" y="39" width="3" height="3" fill="#F4E5BA"/>
-<rect x="593" y="42" width="12" height="3" fill="#F4E5BA"/>
-<rect x="605" y="45" width="3" height="3" fill="#F4E5BA"/>
-<rect x="605" y="48" width="3" height="3" fill="#F4E5BA"/>
-<rect x="593" y="51" width="3" height="3" fill="#F4E5BA"/>
-<rect x="605" y="51" width="3" height="3" fill="#F4E5BA"/>
-<rect x="596" y="54" width="9" height="3" fill="#F4E5BA"/>
-<rect x="614" y="36" width="9" height="3" fill="#F4E5BA"/>
+<rect x="605" y="39" width="3" height="3" fill="#F4E5BA"/>
+<rect x="602" y="42" width="3" height="3" fill="#F4E5BA"/>
+<rect x="599" y="45" width="3" height="3" fill="#F4E5BA"/>
+<rect x="596" y="48" width="3" height="3" fill="#F4E5BA"/>
+<rect x="596" y="51" width="3" height="3" fill="#F4E5BA"/>
+<rect x="596" y="54" width="3" height="3" fill="#F4E5BA"/>
+<rect x="611" y="36" width="15" height="3" fill="#F4E5BA"/>
 <rect x="611" y="39" width="3" height="3" fill="#F4E5BA"/>
-<rect x="623" y="39" width="3" height="3" fill="#F4E5BA"/>
-<rect x="623" y="42" width="3" height="3" fill="#F4E5BA"/>
-<rect x="620" y="45" width="3" height="3" fill="#F4E5BA"/>
-<rect x="617" y="48" width="3" height="3" fill="#F4E5BA"/>
-<rect x="614" y="51" width="3" height="3" fill="#F4E5BA"/>
-<rect x="611" y="54" width="15" height="3" fill="#F4E5BA"/>
+<rect x="611" y="42" width="12" height="3" fill="#F4E5BA"/>
+<rect x="623" y="45" width="3" height="3" fill="#F4E5BA"/>
+<rect x="623" y="48" width="3" height="3" fill="#F4E5BA"/>
+<rect x="611" y="51" width="3" height="3" fill="#F4E5BA"/>
+<rect x="623" y="51" width="3" height="3" fill="#F4E5BA"/>
+<rect x="614" y="54" width="9" height="3" fill="#F4E5BA"/>
 <rect x="634" y="44" width="8" height="2" fill="#A9C8FF"/>
 <rect x="634" y="46" width="2" height="2" fill="#A9C8FF"/>
 <rect x="642" y="46" width="2" height="2" fill="#A9C8FF"/>
@@ -915,6 +914,7 @@
 <rect x="742" y="204" width="12" height="12" fill="#14244F"/>
 <rect x="756" y="120" width="12" height="12" fill="#1A1C26"/>
 <rect x="756" y="134" width="12" height="12" fill="#14244F"/>
+<rect x="756" y="148" width="12" height="12" fill="#14244F"/>
 <rect x="28" y="244" width="4" height="2" fill="#9AA1B2"/>
 <rect x="34" y="244" width="2" height="2" fill="#9AA1B2"/>
 <rect x="28" y="246" width="2" height="2" fill="#9AA1B2"/>
